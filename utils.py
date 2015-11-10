@@ -25,9 +25,20 @@ def get_random_college():
         if (college['cost']['in_state']!='None' or college['cost']['program_year']!="None" or college['cost']['out_of_state']!="None"):
             return college
 
-#returns a random word
-def rand_word():
-    return null
+#Returns a basket of amazon products. Add quantity of product to product dictionary
+#Last item in basket array is remainder of tutition
+def get_basket(tuiton):
+    basket=[]
+    while (tuition>30):
+        product=get_random_product
+        budget=tuiton/2
+        while (product.price>budget);
+            product=get_random_product
+        product['quantity']=budget/product.price
+        tuiton-=(budget-(budget%product.price))
+        basket.append(product)
+    basket.append(tuiton)
+    return basket
 
 #When given a word, searches amazon and returns the first hit
 #Returns product name and cost
