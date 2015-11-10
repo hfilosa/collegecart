@@ -1,17 +1,8 @@
 <html>
-  <style>
-    img{
-    height:200px;
-    }
-  </style>
-
   <h1>For the price of one year at {% s.college_name %} you could buy...</h1>
   {% for thing in s %}
   <h2>{% thing.ammount %}x</h2>
-  <img src="{% thing.image_url %}">
-  <p>
-    {% thing.product_name %}
-  </p>
+  
   <hr>
   {% endfor %}
 </html>
