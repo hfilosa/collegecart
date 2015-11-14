@@ -8,4 +8,4 @@ For College information: https://catalog.data.gov/dataset/college-scorecard/reso
 To generate random Amazon productsw: http://www.randomamazonproduct.com/
 
 ## Installation
-`pip install bottlenose pyquery requests python-amazon-simple-product-api lxml`
+`pip install bottlenose pyquery requests python-dateutil python-amazon-simple-product-api lxml`
