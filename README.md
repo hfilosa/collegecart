@@ -6,3 +6,6 @@ For College information: https://catalog.data.gov/dataset/college-scorecard/reso
 
 
 To generate random Amazon productsw: http://www.randomamazonproduct.com/
+
+
+To run must pip install pyquery and request
