@@ -2,6 +2,9 @@ import urllib2
 import json
 import random
 from pyquery import PyQuery as pq
+from amazon.api import AmazonAPI
+
+Amazon = AmazonAPI('AKIAJUNVP6BHD3AFMXSQ', 'KQNrDP1ij/4RtEJIp/eFXogV48qha5YO3yHNjMHz', 'chrgra-20')
 
 #Returns a college with that position n, some schools don't have tuition in the database
 #Returned as a dictionary with 'name' and 'cost' keys
@@ -54,19 +57,20 @@ def get_random_product():
         'image': ''
     }
     url="http://www.randomamazonproduct.com"
-    # print urllib2.urlopen(url).read()
-    # soup = BeautifulSoup(html, 'html.parser')
+
     d = pq(url=url, headers={
         'user-agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36',
         'cookie': '__cfduid=d5fccb67ae1087311327fbfaf2f1644401447515945'
     })
+
     product['link'] = d(".outlink").attr('href')
     product['name'] = d(".amazon-title").text()
     product['image'] = d(".amazon-image").attr('src')
 
-    d = pq(url=product['link'], headers={
-        'user-agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
-    })
-    product['price'] = float(d('#priceblock_ourprice').text()[1:])
+    pid = product['link'].split('/dp/')[1].split('%3F')[0]
+    product['price'] = Amazon.lookup(ItemId=pid).price_and_currency[0]
+
 
     return product
+
+print get_random_product()
