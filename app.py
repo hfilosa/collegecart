@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect
-import utils.py
+import utils
 
 app=Flask(__name__)
 
@@ -8,7 +8,9 @@ def home():
     """
     our only route, it loads a page full of stuff
     """
-    return render_template('base.html')
+    college=utils.get_random_college()
+    basket=utils.get_basket(college['cost'])
+    return render_template('base.html',c=college,s=basket)
 
 if __name__=="__main__":
     app.debug = True

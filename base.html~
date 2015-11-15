@@ -1,8 +1,0 @@
-<html>
-  <h1>For the price of one year at {% s.college_name %} you could buy...</h1>
-  {% for thing in s %}
-  <h2>{% thing.ammount %}x</h2>
-  
-  <hr>
-  {% endfor %}
-</html>

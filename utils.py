@@ -17,7 +17,21 @@ def get_college(n):
     request = urllib2.urlopen(url)
     result = request.read()
     r = json.loads(result)
-    return {'name':r['results'][n]['school']['name'],'cost':r['results'][n]['2013']['cost']['tuition']}
+
+    #all the possible avalible costs
+    cost_dict=r['results'][n]['2013']['cost']['tuition']
+    #Narrow the cost down to one value
+    if (cost_dict['out_of_state']=='None'):
+        if (cost_dict['in_state']=='None'):
+            if (ost_dict['program_year']=='None'):
+                cost=0
+            cost=cost_dict['program_year']
+        else:
+            cost=cost_dict['in_state']
+    else:
+        cost=cost_dict['out_of_state']
+    
+    return {'name':r['results'][n]['school']['name'],'cost':cost}
 
 #Return a random college
 def get_random_college():
@@ -26,28 +40,25 @@ def get_random_college():
         random.seed()
         r=random.randrange(0,3587)
         college=get_college(r)
-        if (college['cost']['in_state']!='None' or college['cost']['program_year']!="None" or college['cost']['out_of_state']!="None"):
+        if (college['cost']!='None'):
             return college
 
 #Returns a basket of amazon products. Add quantity of product to product dictionary
 #Last item in basket array is remainder of tutition
-def get_basket(tuiton):
+def get_basket(tuition):
     basket=[]
     while (tuition>30):
-        product=get_random_product
-        budget=tuiton/2
-        while (product.price>budget):
+        product={}
+        product=get_random_product()
+        print(product)
+        budget=tuition/2
+        while (product['price']>budget):
             product=get_random_product
-        product['quantity']=budget/product.price
-        tuiton-=(budget-(budget%product.price))
+        product['quantity']=budget/product['price']
+        tuition-=(budget-(budget%product['price']))
         basket.append(product)
-    basket.append(tuiton)
+    basket.append(tuition)
     return basket
-
-#When given a word, searches amazon and returns the first hit
-#Returns product name and cost
-def get_goods(search):
-    return null
 
 def get_random_product():
     product = {
@@ -70,7 +81,12 @@ def get_random_product():
     pid = product['link'].split('/dp/')[1].split('%3F')[0]
     product['price'] = Amazon.lookup(ItemId=pid).price_and_currency[0]
 
-
     return product
 
-print get_random_product()
+"""
+basket=get_basket(1000)
+i=0
+while (i<basket.size):
+    print(basket[i])
+    i+=1
+"""

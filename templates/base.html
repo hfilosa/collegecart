@@ -1,0 +1,14 @@
+<html>
+  <title>CollegeCart</title>
+  <link  type="text/css" rel="stylesheet" href="template.css">
+
+  <h1>For the price of one year at {% c.name %} you could buy...</h1>
+  {% for thing in s %}
+  <h2>{% thing.quantity %}x</h2>
+  <img src="{% thing.image %}">
+  <p>
+    {% thing.name %}
+  </p>
+  <hr>
+  {% endfor %}
+</html>
