@@ -35,12 +35,16 @@ def get_college(n):
 
 #Return a random college
 def get_random_college():
+    print("Starting college selection")
     done=False
+    random.seed()
     while (done!=True):
-        random.seed()
+        print("looping...")
         r=random.randrange(0,3587)
         college=get_college(r)
-        if (college['cost']!='None'):
+        if (college['cost']!=None):
+            print("College selected")
+            print(college)
             return college
 
 #Returns a basket of amazon products. Add quantity of product to product dictionary
@@ -52,9 +56,9 @@ def get_basket(tuition):
         product=get_random_product()
         print(product)
         budget=tuition/2
-        while (product['price']>budget):
-            product=get_random_product
-        product['quantity']=budget/product['price']
+        while (product['price']>budget or product['price']<0.01 ):
+            product=get_random_product()
+        product['quantity']=(int)(budget/product['price'])
         tuition-=(budget-(budget%product['price']))
         basket.append(product)
     basket.append(tuition)

@@ -2,13 +2,18 @@
   <title>CollegeCart</title>
   <link  type="text/css" rel="stylesheet" href="template.css">
 
-  <h1>For the price of one year at {% c.name %} you could buy...</h1>
+  <h1>For the price of one year at {{ c.name }} (${{c.cost}}) you could buy a shopping basket of ...</h1>
   {% for thing in s %}
-  <h2>{% thing.quantity %}x</h2>
-  <img src="{% thing.image %}">
-  <p>
-    {% thing.name %}
-  </p>
+  
+  {% if loop.last %}
+  <h2>With ${{thing}} left over!</h2>
+  {% else %}
+
+  <h2>{{ thing.quantity }} : {{ thing.name }} for ${{thing.price}} each</h2>
+  <img src= {{ thing.image }}>
+  <br>
+  <a href={{thing.link}}>Buy it on amazon</a>
   <hr>
+  {% endif %}
   {% endfor %}
 </html>

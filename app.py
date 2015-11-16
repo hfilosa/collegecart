@@ -8,8 +8,12 @@ def home():
     """
     our only route, it loads a page full of stuff
     """
+    colleg={}
+    basket={}
     college=utils.get_random_college()
     basket=utils.get_basket(college['cost'])
+    s={}
+    c={}
     return render_template('base.html',c=college,s=basket)
 
 if __name__=="__main__":
